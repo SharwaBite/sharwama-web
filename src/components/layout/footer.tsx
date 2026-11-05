@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Clock, MapPin, Phone } from "lucide-react";
+import { SHOP_INFO } from "@/mocks/shop";
 
 export function Footer() {
   return (
@@ -9,7 +10,7 @@ export function Footer() {
         <svg
           viewBox="0 0 1440 48"
           fill="none"
-           preserveAspectRatio="none"
+          preserveAspectRatio="none"
           aria-hidden="true"
           className="h-7 w-full sm:h-11"
         >
@@ -29,7 +30,7 @@ export function Footer() {
               {/* Notch & status bar */}
               <div className="mx-auto mb-2.5 h-3 w-20 rounded-full bg-[#111C24]" />
               <div className="flex items-center justify-between text-[9px] font-semibold text-stone-500">
-                <span>Lagos, Nigeria</span>
+                <span>{SHOP_INFO.cityLabel}</span>
                 <span className="inline-block size-2 rounded-full bg-[#F97316]" />
               </div>
               <div className="mt-1.5 rounded-full bg-stone-100 px-2.5 py-1 text-[9px] text-stone-400">
@@ -60,7 +61,7 @@ export function Footer() {
 
           {/* Right Headline & Store Badges */}
           <div className="flex flex-col items-center text-center md:w-7/12 md:items-start md:text-left">
-            <h2 className="display-type text-[#111C24] text-3xl tracking-tight sm:text-4xl lg:text-[42px]">
+            <h2 className="display-type text-3xl tracking-tight text-[#111C24] sm:text-4xl lg:text-[42px]">
               CRAVING SHAWARMA?
             </h2>
             <p className="display-type mt-1 text-xl tracking-wide text-white sm:text-2xl">
@@ -136,21 +137,23 @@ export function Footer() {
       <div className="bg-[#111C24] py-8 text-stone-300">
         <div className="mx-auto flex max-w-[1280px] flex-col items-center justify-between gap-6 px-4 text-xs sm:flex-row sm:px-8 lg:px-12">
           <div className="flex flex-wrap items-center justify-center gap-6">
-            <span className="display-type text-lg text-white">SharwaBite</span>
+            <span className="display-type text-lg text-white">
+              {SHOP_INFO.name}
+            </span>
             <span className="inline-flex items-center gap-1.5">
               <Clock className="size-3.5 text-[#F97316]" />
-              Open 10:00 AM – 10:00 PM daily
+              {SHOP_INFO.hoursLabel}
             </span>
             <a
-              href="tel:08030000000"
+              href={SHOP_INFO.phoneHref}
               className="inline-flex items-center gap-1.5 transition-colors hover:text-white"
             >
               <Phone className="size-3.5 text-[#F97316]" />
-              0803 000 0000
+              {SHOP_INFO.phone}
             </a>
             <span className="inline-flex items-center gap-1.5">
               <MapPin className="size-3.5 text-[#F97316]" />
-              Delivery in 30–45 mins
+              Delivery in {SHOP_INFO.deliveryWindow}
             </span>
           </div>
 
@@ -161,11 +164,10 @@ export function Footer() {
             <Link href="/#menu" className="hover:text-white">
               Terms
             </Link>
-            <span>&copy; {new Date().getFullYear()} SharwaBite</span>
+            <span>&copy; 2026 {SHOP_INFO.name}</span>
           </div>
         </div>
       </div>
     </footer>
   );
 }
-

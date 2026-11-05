@@ -30,13 +30,13 @@ export default function GlobalError({
         <button
           type="button"
           onClick={reset}
-          className="bg-ember hover:bg-ember-dark border-char shadow-hard inline-flex h-[52px] cursor-pointer items-center justify-center rounded-[12px] border-2 px-6 text-base font-semibold text-white transition-transform hover:-translate-y-0.5"
+          className="bg-ember hover:bg-ember-dark border-char shadow-hard inline-flex h-13 cursor-pointer items-center justify-center rounded-[12px] border-2 px-6 text-base font-semibold text-white transition-transform hover:-translate-y-0.5"
         >
           Try again
         </button>
         <Link
           href="/"
-          className="border-char text-char inline-flex h-[52px] items-center justify-center rounded-[12px] border-2 bg-white px-6 text-base font-semibold transition-transform hover:-translate-y-0.5"
+          className="border-char text-char inline-flex h-13 items-center justify-center rounded-[12px] border-2 bg-white px-6 text-base font-semibold transition-transform hover:-translate-y-0.5"
         >
           Browse the menu
         </Link>

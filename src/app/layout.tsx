@@ -3,6 +3,7 @@ import { Archivo, Permanent_Marker } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/providers/providers";
 import { Toaster } from "@/components/ui/sonner";
+import { OfflineGuard } from "@/components/layout/offline-screen";
 
 const archivo = Archivo({
   subsets: ["latin"],
@@ -32,7 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="bg-page text-char flex min-h-full flex-col">
         <Providers>
-          {children}
+          <OfflineGuard>{children}</OfflineGuard>
           <Toaster position="top-center" />
         </Providers>
       </body>

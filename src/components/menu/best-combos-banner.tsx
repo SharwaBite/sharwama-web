@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { COMBO_SHOWCASE_PLATTERS } from "@/mocks/menu";
 
 export function BestCombosBanner() {
   return (
@@ -59,44 +60,31 @@ export function BestCombosBanner() {
 
         {/* Right Staggered 3-Platter Trio */}
         <div className="grid grid-cols-3 items-end gap-3 sm:gap-5 lg:col-span-7">
-          {/* Left Platter */}
-          <div className="relative aspect-square overflow-hidden rounded-2xl border-2 border-white/15 bg-stone-800 shadow-lg">
-            <Image
-              src="https://images.unsplash.com/photo-1561651823-34feb02250e4?auto=format&fit=crop&w=450&q=80"
-              alt="Beef shawarma platter"
-              fill
-              loading="lazy"
-              sizes="(max-width: 1024px) 30vw, 200px"
-              className="object-cover"
-            />
-          </div>
-
-          {/* Center Elevated Platter (breaks above banner on desktop) */}
-          <div className="relative -mt-6 aspect-square overflow-hidden rounded-2xl border-2 border-[#F97316] bg-stone-800 shadow-2xl sm:-mt-14">
-            <Image
-              src="https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=450&q=80"
-              alt="Signature double chicken shawarma combo"
-              fill
-              loading="lazy"
-              sizes="(max-width: 1024px) 30vw, 220px"
-              className="object-cover"
-            />
-          </div>
-
-          {/* Right Platter */}
-          <div className="relative aspect-square overflow-hidden rounded-2xl border-2 border-white/15 bg-stone-800 shadow-lg">
-            <Image
-              src="https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=450&q=80"
-              alt="Crispy mixed shawarma platter"
-              fill
-              loading="lazy"
-              sizes="(max-width: 1024px) 30vw, 200px"
-              className="object-cover"
-            />
-          </div>
+          {COMBO_SHOWCASE_PLATTERS.map((platter) => (
+            <div
+              key={platter.id}
+              className={`relative aspect-square overflow-hidden rounded-2xl border-2 bg-stone-800 ${
+                platter.isCenterElevated
+                  ? "-mt-6 border-[#F97316] shadow-2xl sm:-mt-14"
+                  : "border-white/15 shadow-lg"
+              }`}
+            >
+              <Image
+                src={platter.imageUrl}
+                alt={platter.alt}
+                fill
+                loading="lazy"
+                sizes={
+                  platter.isCenterElevated
+                    ? "(max-width: 1024px) 30vw, 220px"
+                    : "(max-width: 1024px) 30vw, 200px"
+                }
+                className="object-cover"
+              />
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
 }
-

@@ -2,55 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Plus } from "lucide-react";
 import { formatKobo } from "@/lib/money";
-
-export interface FeaturedMenuItem {
-  id: string;
-  name: string;
-  description: string;
-  priceKobo: number;
-  imageUrl: string;
-  badge?: string;
-}
-
-const FEATURED_MENU: FeaturedMenuItem[] = [
-  {
-    id: "chicken-shawarma",
-    name: "CHICKEN SHAWARMA",
-    description:
-      "Juicy grilled chicken strips with crisp veggies and rich garlic sauce.",
-    priceKobo: 350000,
-    imageUrl:
-      "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=600&q=80",
-    badge: "Best seller",
-  },
-  {
-    id: "beef-shawarma",
-    name: "BEEF SHAWARMA",
-    description:
-      "Spiced tender beef slices, melted cheese, sautéed onions and slaw.",
-    priceKobo: 400000,
-    imageUrl:
-      "https://images.unsplash.com/photo-1561651823-34feb02250e4?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: "mixed-shawarma",
-    name: "MIXED SPECIAL",
-    description:
-      "Crispy chicken and spiced beef together with double sausage and sauce.",
-    priceKobo: 450000,
-    imageUrl:
-      "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: "combo-meal",
-    name: "COMBO MEAL",
-    description:
-      "Loaded shawarma, spiced fries, and chilled drink. The perfect combo!",
-    priceKobo: 480000,
-    imageUrl:
-      "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
-  },
-];
+import { FEATURED_MENU_ITEMS } from "@/mocks/menu";
 
 export function FeaturedMenuSection() {
   return (
@@ -64,7 +16,7 @@ export function FeaturedMenuSection() {
       </div>
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {FEATURED_MENU.map((item) => (
+        {FEATURED_MENU_ITEMS.map((item) => (
           <article
             key={item.id}
             className="group flex flex-col justify-between rounded-[18px] bg-[#FDF8F0] p-4 transition-all duration-200 hover:-translate-y-1 hover:shadow-md sm:p-5"
@@ -89,7 +41,7 @@ export function FeaturedMenuSection() {
 
               {/* Title & Description */}
               <h3 className="display-type text-xl tracking-wide text-[#111C24]">
-                {item.name}
+                {item.shortTitle}
               </h3>
               <p className="mt-1.5 text-xs leading-relaxed text-stone-600">
                 {item.description}
@@ -115,4 +67,3 @@ export function FeaturedMenuSection() {
     </section>
   );
 }
-

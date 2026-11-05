@@ -12,7 +12,7 @@ export default async function OrderTrackingPage({
   const { token } = await params;
 
   return (
-    <main className="mx-auto flex w-full max-w-[1440px] flex-1 flex-col px-4 py-12 sm:px-8 lg:px-12">
+    <main className="mx-auto flex w-full max-w-360 flex-1 flex-col px-4 py-12 sm:px-8 lg:px-12">
       <span className="font-marker bg-saffron border-char shadow-hard mb-4 inline-block w-fit -rotate-3 rounded-full border-2 px-4 py-1 text-sm">
         Live tracking
       </span>

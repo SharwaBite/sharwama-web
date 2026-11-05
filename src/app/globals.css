@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-    --color-ember: #C2410C;
+  --color-ember: #C2410C;
   --color-ember-dark: #9A3412;
   --color-ember-soft: #FFEDD5;
   --color-saffron: #FBBF24;
@@ -96,7 +96,7 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-@layer base {
+/* @layer base {
   * {
     @apply border-border outline-ring/50;
   }
@@ -106,7 +106,7 @@
   html {
     @apply font-sans;
   }
-}
+} */
 
 /* Sign-painter headline: the one-to-three-word display type */
 @utility display-type {

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Archivo, Permanent_Marker } from "next/font/google";
+import { Archivo, Permanent_Marker } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/providers/providers";
+import { Toaster } from "@/components/ui/sonner";
 
 const archivo = Archivo({
   subsets: ["latin"],
@@ -17,30 +18,23 @@ const marker = Permanent_Marker({
   display: "swap",
 });
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
   title: { default: "SharwaBite", template: "%s | SharwaBite" },
   description:
-    "Fresh shawarma, delivered hot and fast at your door steps. Order yours now.",
+    "Fresh shawarma crafted with bold flavors, delivered hot and fast to your doorstep.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${archivo.variable} ${marker.variable} h-full font-sans antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <Providers> {children}</Providers>
+      <body className="bg-page text-char flex min-h-full flex-col">
+        <Providers>
+          {children}
+          <Toaster position="top-center" />
+        </Providers>
       </body>
     </html>
   );

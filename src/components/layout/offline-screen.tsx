@@ -41,7 +41,7 @@ export function OfflineScreen({ onRetry }: { onRetry?: () => void }) {
       className="bg-page text-char flex min-h-screen w-full flex-col items-center justify-center px-4 py-12 text-center"
     >
       {/* Illustration Card */}
-      <div className="relative mb-6 flex size-24 items-center justify-center rounded-full border-2 border-[#111C24] bg-[#FFEDD5] shadow-[3px_3px_0_#1C1917]">
+      <div className="relative mb-6 flex size-24 items-center justify-center rounded-full border-2 border-[#111C24] bg-ember-soft shadow-hard">
         <WifiOff className="size-11 text-ember" strokeWidth={2} />
         <span className="font-marker bg-saffron border-char shadow-hard absolute -top-2 -right-6 -rotate-6 rounded-full border-2 px-3 py-0.5 text-xs text-[#111C24]">
           Offline
@@ -64,7 +64,7 @@ export function OfflineScreen({ onRetry }: { onRetry?: () => void }) {
           type="button"
           onClick={handleRetry}
           disabled={checking}
-          className="bg-ember hover:bg-ember-dark border-char shadow-hard inline-flex h-[52px] min-w-[180px] cursor-pointer items-center justify-center gap-2 rounded-[12px] border-2 px-7 text-base font-semibold text-white transition-transform hover:-translate-y-0.5 disabled:opacity-60"
+          className="bg-ember hover:bg-ember-dark border-char shadow-hard inline-flex h-13 min-w-45 cursor-pointer items-center justify-center gap-2 rounded-[12px] border-2 px-7 text-base font-semibold text-white transition-transform hover:-translate-y-0.5 disabled:opacity-60"
         >
           <RefreshCw className={`size-4.5 ${checking ? "animate-spin" : ""}`} />
           {checking ? "Checking..." : "Try again"}

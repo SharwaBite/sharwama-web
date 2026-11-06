@@ -4,14 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, ShoppingBag, X } from "lucide-react";
-
-const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/#menu", label: "Menu" },
-  { href: "/#combos", label: "Promo" },
-  { href: "/account", label: "My Orders" },
-  { href: "/login", label: "Sign In" },
-] as const;
+import { NAV_LINKS, SHOP_INFO } from "@/mocks/shop";
+import { getCartTotalCount, useCartStore } from "@/hooks/use-cart";
 
 function ShawarmaLogoIcon({ className }: { className?: string }) {
   return (
@@ -46,20 +40,34 @@ function ShawarmaLogoIcon({ className }: { className?: string }) {
 export function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const items = useCartStore((s) => s.items);
+  const openCart = useCartStore((s) => s.openCart);
+  const totalCount = getCartTotalCount(items);
 
   return (
     <header className="bg-page/95 sticky top-0 z-40 w-full backdrop-blur-sm">
-      <div className="mx-auto flex h-20 w-full max-w-[1280px] items-center justify-between px-4 sm:px-8 lg:px-12">
-        {/* Brand Logo */}
-        <Link
-          href="/"
-          className="flex items-center gap-2.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F97316]"
-        >
-          <ShawarmaLogoIcon className="size-9 shrink-0" />
-          <span className="display-type text-char text-2xl tracking-tight sm:text-[28px]">
-            SharwaBite
+      <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-4 sm:px-8 lg:px-12">
+        {/* Brand Logo + Open Now Pill */}
+        <div className="flex items-center gap-3">
+          <Link
+            href="/"
+            className="flex items-center gap-2.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F97316]"
+          >
+            <ShawarmaLogoIcon className="size-9 shrink-0" />
+            <span className="display-type text-char text-2xl tracking-tight sm:text-[28px]">
+              {SHOP_INFO.name}
+            </span>
+          </Link>
+
+          <span className="border-char/15 hidden items-center gap-1.5 rounded-full border bg-white px-2.5 py-1 text-[11px] font-bold text-[#1C1917] sm:inline-flex">
+            <span
+              className={`size-2 rounded-full ${
+                SHOP_INFO.isOpen ? "bg-success" : "bg-stone-400"
+              }`}
+            />
+            {SHOP_INFO.isOpen ? "Open now" : "Closed"}
           </span>
-        </Link>
+        </div>
 
         {/* Desktop Nav Links */}
         <nav
@@ -90,16 +98,19 @@ export function Header() {
 
         {/* Right Actions */}
         <div className="hidden items-center gap-3 md:flex">
-          <Link
-            href="/checkout"
-            aria-label="View cart"
-            className="border-char/15 text-char hover:border-[#F97316] hover:text-[#F97316] relative inline-flex size-10 items-center justify-center rounded-full border bg-white transition-colors"
+          <button
+            type="button"
+            onClick={openCart}
+            aria-label={`Open cart (${totalCount} items)`}
+            className="border-char/15 text-char hover:border-[#F97316] hover:text-[#F97316] relative inline-flex size-10 cursor-pointer items-center justify-center rounded-full border bg-white transition-colors"
           >
             <ShoppingBag className="size-4.5" />
-            <span className="bg-ember absolute -top-1 -right-1 flex size-5 items-center justify-center rounded-full text-[11px] font-bold text-white">
-              2
-            </span>
-          </Link>
+            {totalCount > 0 && (
+              <span className="bg-ember absolute -top-1 -right-1 flex size-5 items-center justify-center rounded-full text-[11px] font-bold text-white tabular-nums">
+                {totalCount}
+              </span>
+            )}
+          </button>
 
           <Link
             href="/#menu"
@@ -111,23 +122,26 @@ export function Header() {
 
         {/* Mobile Menu Trigger */}
         <div className="flex items-center gap-2.5 md:hidden">
-          <Link
-            href="/checkout"
-            aria-label="View cart"
-            className="border-char/15 text-char relative inline-flex size-10 items-center justify-center rounded-full border bg-white"
+          <button
+            type="button"
+            onClick={openCart}
+            aria-label={`Open cart (${totalCount} items)`}
+            className="border-char/15 text-char relative inline-flex size-10 cursor-pointer items-center justify-center rounded-full border bg-white"
           >
             <ShoppingBag className="size-4.5" />
-            <span className="bg-ember absolute -top-1 -right-1 flex size-5 items-center justify-center rounded-full text-[11px] font-bold text-white">
-              2
-            </span>
-          </Link>
+            {totalCount > 0 && (
+              <span className="bg-ember absolute -top-1 -right-1 flex size-5 items-center justify-center rounded-full text-[11px] font-bold text-white tabular-nums">
+                {totalCount}
+              </span>
+            )}
+          </button>
 
           <button
             type="button"
             onClick={() => setMobileOpen((prev) => !prev)}
             aria-expanded={mobileOpen}
             aria-label="Toggle navigation menu"
-            className="text-char inline-flex size-10 items-center justify-center rounded-full border border-stone-200 bg-white"
+            className="text-char inline-flex size-10 cursor-pointer items-center justify-center rounded-full border border-stone-200 bg-white"
           >
             {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
@@ -165,4 +179,3 @@ export function Header() {
     </header>
   );
 }
-

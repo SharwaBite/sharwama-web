@@ -6,7 +6,7 @@ export default function NotFound() {
   return (
     <main className="bg-page relative flex min-h-screen w-full items-center justify-center overflow-hidden px-4 py-10 sm:px-8">
       {/* Centered Card Container */}
-      <div className="relative z-10 w-full max-w-[960px] bg-white px-6 py-10 sm:px-12 sm:py-14 lg:px-16 lg:py-16">
+      <div className="relative z-10 w-full max-w-240 bg-white px-6 py-10 sm:px-12 sm:py-14 lg:px-16 lg:py-16">
         {/* Top-Right Close Button */}
         <Link
           href="/"
@@ -20,7 +20,7 @@ export default function NotFound() {
         <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-12 md:gap-12">
           {/* Left Column: Large Background-Free Shawarma Image */}
           <div className="flex items-center justify-center md:col-span-6">
-            <div className="relative aspect-square w-full max-w-[380px]">
+            <div className="relative aspect-square w-full max-w-95">
               <Image
                 src="/shawarma-cutout.png"
                 alt="Freshly grilled loaded shawarma wrap"

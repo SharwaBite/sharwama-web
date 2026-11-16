@@ -86,8 +86,9 @@ export function OfflineScreen({ onRetry }: { onRetry?: () => void }) {
 }
 
 /**
- * Automatically replaces the viewport with the OfflineScreen whenever
- * the browser loses internet connectivity (`navigator.onLine === false`).
+ * Covers the viewport with the OfflineScreen whenever the browser loses
+ * internet connectivity (`navigator.onLine === false`) while keeping
+ * `{children}` mounted so form state is preserved across brief network drops.
  */
 export function OfflineGuard({ children }: { children: React.ReactNode }) {
   const isOnline = useSyncExternalStore(
@@ -96,10 +97,16 @@ export function OfflineGuard({ children }: { children: React.ReactNode }) {
     getServerOnlineSnapshot,
   );
 
-  if (!isOnline) {
-    return <OfflineScreen />;
-  }
-
-  return <>{children}</>;
+  return (
+    <>
+      <div aria-hidden={!isOnline} className={!isOnline ? "hidden" : "contents"}>
+        {children}
+      </div>
+      {!isOnline && (
+        <div className="fixed inset-0 z-100 overflow-y-auto">
+          <OfflineScreen />
+        </div>
+      )}
+    </>
+  );
 }
-

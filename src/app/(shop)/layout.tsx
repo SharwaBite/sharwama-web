@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { ItemOptionSheet } from "@/components/menu/option-sheet";
@@ -10,7 +11,9 @@ export default function ShopLayout({
 }) {
   return (
     <div className="bg-page text-char flex min-h-screen flex-col">
-      <Header />
+      <Suspense fallback={<div className="bg-page h-20 w-full" />}>
+        <Header />
+      </Suspense>
       <div className="flex flex-1 flex-col">{children}</div>
       <Footer />
       <ItemOptionSheet />
